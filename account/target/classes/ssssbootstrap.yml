@@ -1,0 +1,13 @@
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 39.101.199.119:8848
+        service: account
+      config:
+        file-extension: yaml
+        group: DEFAULT_GROUP  # 缺省即可
+        prefix: ${spring.application.name} # 缺省即可
+        server-addr: 39.101.199.119:8848
+
+
