@@ -12,8 +12,8 @@
     if (window.WebSocket) {
         // 随机数
         var random = Math.floor(Math.random()*(10000 - 10 +1) + 10)
-        socket = new WebSocket("ws://127.0.0.1:8000/websocket?userId=" + random);
-        //socket = new WebSocket("ws://39.101.199.119:8000/websocket?userId=" + random);
+        //socket = new WebSocket("ws://127.0.0.1:8000/websocket?userId=" + random);
+        socket = new WebSocket("ws://39.101.199.119:8000/websocket?userId=" + random);
         socket.onmessage = function(event) {
             var ta = document.getElementById('responseText');
             ta.value = ta.value + '\n' + event.data

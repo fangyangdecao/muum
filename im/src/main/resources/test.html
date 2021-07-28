@@ -1,7 +1,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>大家一起来摸鱼</title>
+    <title>大家一起来</title>
 </head>
 <body>
 <script type="text/javascript">
@@ -21,12 +21,12 @@
         };
         socket.onopen = function(event) {
             var ta = document.getElementById('responseText');
-            ta.value = "鱼塘已挖好!";
+            ta.value = "已挖好!";
             //heartCheck.start()
         };
         socket.onclose = function(event) {
             var ta = document.getElementById('responseText');
-            ta.value = ta.value + "鱼塘被炸啦~.~";
+            ta.value = ta.value + "被炸啦~.~";
         };
 
     } else {
@@ -77,7 +77,7 @@
 </script>
 <form onsubmit="return false;">
     <input type="text" name="message" value="说点啥呗" />
-    <input type="button" value="biu~~" onclick="send(this.form.message.value)" />
+    <input type="button" value="~~" onclick="send(this.form.message.value)" />
     <h3>ε=ε=ε=(~￣▽￣)~</h3>
     <textarea id="responseText" style="width:500px;height:300px;"></textarea>
 </form>
