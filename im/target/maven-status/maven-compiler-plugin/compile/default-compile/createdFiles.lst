@@ -3,7 +3,10 @@ com\yhy\service\im\entity\MessageDO$MessageDOBuilder.class
 com\yhy\service\im\utils\SpringBeanFactory.class
 com\yhy\service\im\handler\FirstServerHandler.class
 com\yhy\service\web_socket\GameServer$2.class
+com\yhy\controller\Suo.class
+com\yhy\controller\DeadLockclass.class
 com\yhy\service\im\InitNettyServer.class
+com\yhy\controller\Thread1.class
 com\yhy\service\im\ServerInitializer.class
 com\yhy\service\web_socket\GameServer.class
 com\yhy\service\web_socket\TestCenter.class

@@ -7,9 +7,11 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.concurrent.ThreadLocalRandom;
+import java.util.Map;
+
 
 @RestController
 @RequestMapping("test")
@@ -30,6 +32,7 @@ public class TestController {
                 logger.debug("error test test");
             }
             Thread.sleep(5000);
+            int a = 1/0;
 
         } catch (InterruptedException e) {
             e.printStackTrace();
