@@ -5,7 +5,7 @@ import redis.clients.jedis.JedisPool;
 
 
 public class SubThread extends Thread {
-    private final JedisPool jedisPool;
+    /*private final JedisPool jedisPool;
     private final Subscriber subscriber = new Subscriber();
 
     private final String channel = "mychannel";
@@ -30,5 +30,5 @@ public class SubThread extends Thread {
                 jedis.close();
             }
         }
-    }
+    }*/
 }

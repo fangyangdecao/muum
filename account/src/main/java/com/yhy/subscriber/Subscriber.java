@@ -3,7 +3,7 @@ package com.yhy.subscriber;
 import redis.clients.jedis.JedisPubSub;
 
 public class Subscriber extends JedisPubSub {
-    public Subscriber() {
+    /*public Subscriber() {
     }
 
     public void onMessage(String channel, String message) {
@@ -19,5 +19,5 @@ public class Subscriber extends JedisPubSub {
         System.out.println(String.format("unsubscribe redis channel, channel %s, subscribedChannels %d",
                 channel, subscribedChannels));
 
-    }
+    }*/
 }

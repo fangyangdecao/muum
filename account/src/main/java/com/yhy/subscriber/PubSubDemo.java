@@ -17,13 +17,13 @@ import java.util.concurrent.Executors;
 
 public class PubSubDemo
 {
-    private static List<Integer> toastLog = Lists.newCopyOnWriteArrayList();
+    /*private static List<Integer> toastLog = Lists.newCopyOnWriteArrayList();
     public static void main( String[] args ) throws InterruptedException {
         Color bg = Color.decode("#C6C6C6");
         Color bg2 = Color.decode("#FFFFFF");
         System.out.println(bg);
         System.out.println(bg2);
-
+*/
 
 /*        ExecutorService executor = Executors.newFixedThreadPool(100);
         for (int i = 10000; i > 0; i--) {
@@ -64,5 +64,5 @@ public class PubSubDemo
 
         //Publisher publisher = new Publisher(jedisPool);
         //publisher.start();
-    }
+    //}
 }

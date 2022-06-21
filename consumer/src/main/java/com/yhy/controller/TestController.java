@@ -5,36 +5,36 @@ import com.yhy.fergin_rpc.TestService;
 import com.yhy.util.POIUtils;
 import com.yhy.util.RewardPack;
 import com.yhy.util.TestClass;
-import com.yhy.util.Users;
-import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.util.StringUtil;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.checkerframework.checker.units.qual.A;
+import org.redisson.Redisson;
+import org.redisson.api.RedissonClient;
+import org.redisson.config.Config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
-import org.springframework.util.Assert;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
+import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisPool;
+import redis.clients.jedis.JedisPoolConfig;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.InputStream;
-import java.time.Duration;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.ZoneOffset;
 import java.util.*;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
-import java.util.stream.Collector;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -107,7 +107,30 @@ public class TestController {
     }
 
     public static void main(String[] args) throws InterruptedException {
-        LocalDateTime now = LocalDateTime.now().minusDays(18);
-        System.out.println(now.toInstant(ZoneOffset.UTC).toEpochMilli());
+        JedisPoolConfig config = new JedisPoolConfig();
+        config.setMaxTotal(10);
+        config.setMinIdle(5);
+        config.setTestWhileIdle(true);
+        JedisPool jedisPool = new JedisPool(config, "127.0.0.1", 6379, 2000, "root", 1, false
+        );
+
+        while (true){
+            try (Jedis jedis = jedisPool.getResource()){
+                jedis.sadd("a","1","2","3");
+            }
+            System.out.println("-------------------------------------");
+            ThreadPoolExecutor pool=new ThreadPoolExecutor(5,10,200, TimeUnit.MILLISECONDS,  new ArrayBlockingQueue<Runnable>(5));
+            Lock lock=new ReentrantLock();
+            for(int i=0;i<2;i++){
+                pool.execute(() -> {
+                    try (Jedis jedis = jedisPool.getResource()){
+                        lock.lock();
+                        String a = jedis.spop("a");
+                        System.out.println(a);
+                        lock.unlock();
+                    }
+                });
+            }
+        }
     }
 }

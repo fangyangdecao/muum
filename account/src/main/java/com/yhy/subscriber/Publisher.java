@@ -8,7 +8,7 @@ import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 
 public class Publisher {
-    private final JedisPool jedisPool;
+    /*private final JedisPool jedisPool;
 
     public Publisher(JedisPool jedisPool) {
         this.jedisPool = jedisPool;
@@ -31,5 +31,5 @@ public class Publisher {
                 e.printStackTrace();
             }
         }
-    }
+    }*/
 }
